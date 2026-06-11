@@ -28,7 +28,7 @@
 .auth-brand {
   color: var(--accent);
   font-size: var(--brand-size);
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .auth-top-actions {
@@ -43,7 +43,7 @@
   background: var(--accent);
   border-radius: var(--radius-pill);
   color: var(--bg-soft);
-  font-weight: 800;
+  font-weight: 600;
   min-height: 40px;
   padding: 10px 24px;
 }
@@ -121,7 +121,7 @@
 .auth-title {
   color: var(--text);
   font-size: 2.45rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1;
   margin: 0;
   text-align: left;
@@ -165,7 +165,7 @@
 .form-group label {
   color: var(--text);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.12em;
   padding-left: 5px;
   text-transform: uppercase;
@@ -202,7 +202,7 @@
   cursor: pointer;
   font-family: inherit;
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 600;
   margin-top: 10px;
   min-height: 48px;
   padding: 0 24px;
@@ -239,7 +239,7 @@
 
 .auth-links a {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -255,7 +255,7 @@
 .auth-eyebrow {
   color: var(--accent);
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.12em;
   margin: 28px 0 8px;
   text-transform: uppercase;

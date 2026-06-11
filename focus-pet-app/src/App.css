@@ -42,7 +42,7 @@ select {
 .brand {
   color: var(--accent);
   font-size: var(--brand-size);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .button {
@@ -51,7 +51,7 @@ select {
   border-radius: var(--radius-pill);
   cursor: pointer;
   display: inline-flex;
-  font-weight: 800;
+  font-weight: 600;
   justify-content: center;
   min-height: 48px;
   padding: 0 32px;
@@ -81,7 +81,7 @@ select {
 .field__label {
   color: var(--text);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -166,7 +166,7 @@ select {
 .eyebrow {
   color: var(--accent);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -198,7 +198,7 @@ select {
   background: var(--accent);
   border-radius: var(--radius-pill);
   color: var(--bg-soft);
-  font-weight: 800;
+  font-weight: 600;
   min-height: 40px;
   padding: 10px 24px;
 }
@@ -324,7 +324,7 @@ select {
 
 .auth-small a {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .center-page__brand,
@@ -379,7 +379,7 @@ select {
   cursor: pointer;
   display: grid;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   gap: 18px;
   justify-items: center;
   min-height: 238px;
@@ -517,7 +517,7 @@ select {
 .home-pet-card .pet-card h2 {
   color: var(--text);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.01em;
   margin: 0;
 }
@@ -533,7 +533,7 @@ select {
   border-radius: 50%;
   display: inline-flex;
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 600;
   height: 144px;
   justify-content: center;
   margin-bottom: 24px;
@@ -656,7 +656,7 @@ select {
 .stat-bar span,
 .stat-bar__gain {
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -738,7 +738,7 @@ select {
 
 .section-heading a {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .task-list {
@@ -847,7 +847,7 @@ select {
   cursor: pointer;
   display: inline-flex;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   justify-content: center;
   min-height: 36px;
   padding: 0 14px;
@@ -875,7 +875,7 @@ select {
 .task-card p {
   color: var(--accent);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 8px 0 0;
   text-transform: uppercase;
 }
@@ -903,7 +903,7 @@ select {
 .task-form-back {
   color: var(--accent);
   display: inline-flex;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 24px;
 }
 
@@ -973,7 +973,7 @@ select {
   border: 1px solid rgba(255, 107, 107, 0.28);
   border-radius: var(--radius-md);
   color: var(--danger);
-  font-weight: 800;
+  font-weight: 600;
   padding: 14px 16px;
 }
 
@@ -991,7 +991,7 @@ select {
 .task-form-preview > p:not(.eyebrow) {
   color: var(--accent);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -1028,7 +1028,7 @@ select {
 .segmented-control .is-active {
   background: var(--accent);
   color: var(--bg-soft);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .shop-grid {
@@ -1057,7 +1057,7 @@ select {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 24px;
   padding: 14px 18px;
 }
@@ -1138,7 +1138,7 @@ select {
   color: var(--text-muted);
   display: grid;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   gap: 4px;
   justify-items: center;
   min-width: 96px;
@@ -1185,7 +1185,7 @@ select {
 
 .session-task span {
   color: var(--text-muted);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .session-task strong {
@@ -1211,7 +1211,7 @@ select {
   color: var(--text);
   display: block;
   font-size: 104px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 0.95;
   margin: 0;
@@ -1427,7 +1427,7 @@ select {
 .session-complete__coins span {
   color: var(--text-muted);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1619,4 +1619,8 @@ select {
     min-width: 132px;
     padding: 0 24px;
   }
+}
+
+h1, h2 {
+  font-weight: 600;
 }
