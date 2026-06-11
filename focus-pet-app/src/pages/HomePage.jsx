@@ -80,9 +80,15 @@ function HomePage() {
           </div>
 
           <div style={{ marginTop: '32px' }}>
-            <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
-              <Button>Start Session</Button>
-            </Link>
+            {pet.hp <= 0 ? (
+              <Link state={{ isRegeneration: true }} to="/session">
+                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Start Regeneration Session (30m)</Button>
+              </Link>
+            ) : (
+              <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
+                <Button>Start Session</Button>
+              </Link>
+            )}
           </div>
         </div>
       </section>

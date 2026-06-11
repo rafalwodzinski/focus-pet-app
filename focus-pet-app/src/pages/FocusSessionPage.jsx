@@ -21,18 +21,22 @@ function FocusSessionPage() {
   const [remainingSeconds, setRemainingSeconds] = useState(null);
   const [completedSession, setCompletedSession] = useState(null);
   const [isZenSoundPlaying, setIsZenSoundPlaying] = useState(false);
+  const isRegeneration = location.state?.isRegeneration || false;
   const selectedTaskFromRoute = location.state?.task;
   const selectedTaskId = location.state?.taskId || selectedTaskFromRoute?.id;
-  const task =
+  const task = isRegeneration ? { title: 'Regeneration Session', sessionLength: 30, id: 'regen' } : (
     appState?.tasks?.find((item) => item.id === selectedTaskId) ||
     selectedTaskFromRoute ||
     appState?.tasks?.[0] ||
-    mockTasks[0];
+    mockTasks[0]
+  );
   const sessionDurationSeconds = (task.sessionLength || 25) * 60;
 
   const completeSession = useCallback((focusSeconds) => {
     const finalFocusSeconds = Math.max(focusSeconds, 0);
-    const rewards = calculateSessionRewards(finalFocusSeconds);
+    const rewards = isRegeneration
+      ? { coins: 0, xp: 0, hp: 50 }
+      : calculateSessionRewards(finalFocusSeconds);
 
     setCompletedSession({
       focusSeconds: finalFocusSeconds,
@@ -44,6 +48,10 @@ function FocusSessionPage() {
       return;
     }
 
+    const nextTasks = isRegeneration ? appState.tasks : appState.tasks.map((item) =>
+      item.id === task.id ? { ...item, isDone: true } : item
+    );
+
     const nextState = {
       ...appState,
       coins: appState.coins + rewards.coins,
@@ -52,14 +60,12 @@ function FocusSessionPage() {
         hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
         xp: (appState.pet?.xp || 0) + rewards.xp,
       },
-      tasks: appState.tasks.map((item) =>
-        item.id === task.id ? { ...item, isDone: true } : item
-      ),
+      tasks: nextTasks,
     };
 
     setAppState(nextState);
     saveUserData(currentUser.uid, nextState);
-  }, [appState, currentUser, task.id]);
+  }, [appState, currentUser, task.id, isRegeneration]);
 
   const failSession = useCallback((penaltyHp = 15) => {
     const rewards = { coins: 0, xp: 0, hp: -penaltyHp };

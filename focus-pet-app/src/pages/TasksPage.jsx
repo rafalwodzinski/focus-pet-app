@@ -197,9 +197,15 @@ function TasksPage() {
             <Link to="/tasks/new">
               <Button>+ Add Task</Button>
             </Link>
-            <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
-              <Button>Start Session</Button>
-            </Link>
+            {pet.hp <= 0 ? (
+              <Link state={{ isRegeneration: true }} to="/session">
+                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Regeneration (30m)</Button>
+              </Link>
+            ) : (
+              <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
+                <Button>Start Session</Button>
+              </Link>
+            )}
           </div>
         </div>
 
