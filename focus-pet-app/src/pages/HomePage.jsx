@@ -91,8 +91,6 @@ function HomePage() {
             ))}
           </div>
 
-          </div>
-
           <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginTop: '24px', borderLeft: '4px solid var(--accent)' }}>
             <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
             <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>

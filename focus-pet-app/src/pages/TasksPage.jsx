@@ -192,8 +192,6 @@ function TasksPage() {
               </div>
             )}
           </div>
-
-          </div>
         </div>
 
         <aside className="tasks-pet-panel">
