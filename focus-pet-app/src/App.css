@@ -925,12 +925,12 @@ select {
 
 .task-form-card {
   display: grid;
-  gap: 24px;
-  padding: 40px;
+  gap: 16px;
+  padding: 32px 40px;
 }
 
 .task-form-card h1 {
-  font-size: 44px;
+  font-size: 32px;
   line-height: 1.1;
   margin: 0;
 }
@@ -943,8 +943,12 @@ select {
 
 .task-form-grid {
   display: grid;
-  gap: 18px;
+  gap: 12px 18px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.task-form-grid .field__input {
+  min-height: 40px;
 }
 
 .task-form-grid .field:first-child {
@@ -991,9 +995,9 @@ select {
 }
 
 .task-form-preview .pet-card--compact {
-  margin: 24px 0 0;
+  margin: 16px 0 0;
   max-width: none;
-  padding: 28px;
+  padding: 20px;
 }
 
 .task-form-preview .pet-card__avatar {
@@ -1511,11 +1515,12 @@ select {
   }
 
   .task-form-card {
-    padding: 28px;
+    gap: 16px;
+    padding: 24px;
   }
 
   .task-form-card h1 {
-    font-size: 34px;
+    font-size: 28px;
   }
 
   .task-form-preview {
