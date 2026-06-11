@@ -22,7 +22,7 @@
 }
 
 body {
-  background: #1f1f1f;
+  background: var(--bg);
   color: var(--text);
   font-family: Inter, Poppins, Arial, sans-serif;
   margin: 0;
@@ -42,7 +42,7 @@ select {
 .brand {
   color: var(--accent);
   font-size: var(--brand-size);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .button {
@@ -51,7 +51,7 @@ select {
   border-radius: var(--radius-pill);
   cursor: pointer;
   display: inline-flex;
-  font-weight: 800;
+  font-weight: 600;
   justify-content: center;
   min-height: 48px;
   padding: 0 32px;
@@ -81,7 +81,7 @@ select {
 .field__label {
   color: var(--text);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -111,12 +111,19 @@ select {
 }
 
 .auth-page,
-.app-shell,
 .center-page,
 .onboarding-page,
 .session-page {
   background: var(--bg);
   min-height: 100vh;
+}
+
+.app-shell {
+  background: var(--bg);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .auth-page--split {
@@ -166,7 +173,7 @@ select {
 .eyebrow {
   color: var(--accent);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -198,7 +205,7 @@ select {
   background: var(--accent);
   border-radius: var(--radius-pill);
   color: var(--bg-soft);
-  font-weight: 800;
+  font-weight: 600;
   min-height: 40px;
   padding: 10px 24px;
 }
@@ -324,7 +331,7 @@ select {
 
 .auth-small a {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .center-page__brand,
@@ -379,7 +386,7 @@ select {
   cursor: pointer;
   display: grid;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   gap: 18px;
   justify-items: center;
   min-height: 238px;
@@ -392,7 +399,7 @@ select {
 
 .pet-choice__image {
   background: rgba(0, 14, 38, 0.78);
-  border-radius: 8px;
+  border-radius: 50%;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
   display: block;
   height: 152px;
@@ -441,6 +448,9 @@ select {
 
 .page-content {
   margin-top: 32px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .page-content--two-columns {
@@ -452,13 +462,15 @@ select {
 .tasks-layout {
   align-items: start;
   gap: 28px;
-  grid-template-columns: minmax(0, 1fr) 480px;
   min-height: calc(100vh - 260px);
 }
 
 .tasks-main {
   max-width: none;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .tasks-pet-panel {
@@ -471,12 +483,17 @@ select {
 }
 
 .home-content {
+  align-items: start;
   display: grid;
-  justify-items: stretch;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  min-height: 0;
 }
 
 .home-content > h1 {
-  font-size: 52px;
+  grid-column: 1 / -1;
+  font-size: 42px;
+  margin-bottom: -16px;
 }
 
 .home-pet-card {
@@ -487,9 +504,9 @@ select {
 
 .pet-card {
   border-radius: var(--radius-lg);
-  margin: 24px auto;
+  margin: 16px auto;
   max-width: 920px;
-  padding: 40px;
+  padding: 24px;
   text-align: center;
 }
 
@@ -499,26 +516,20 @@ select {
 
 .tasks-pet-panel .pet-card--compact {
   margin-top: 28px;
-  min-height: 500px;
-  padding: 60px 48px;
 }
 
 .home-pet-card .pet-card {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  max-width: none;
-  min-height: 330px;
-  padding: 56px 64px;
-  place-items: center;
+  padding: 32px 24px;
   text-align: center;
   width: 100%;
 }
 
 .home-pet-card .pet-card h2 {
   color: var(--text);
-  font-size: 28px;
-  font-weight: 900;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  margin: 0;
 }
 
 .home-pet-card .pet-card p {
@@ -532,7 +543,7 @@ select {
   border-radius: 50%;
   display: inline-flex;
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 600;
   height: 144px;
   justify-content: center;
   margin-bottom: 24px;
@@ -562,6 +573,7 @@ select {
 }
 
 .pet-card__image {
+  border-radius: 50%;
   display: block;
   height: 100%;
   object-fit: contain;
@@ -571,18 +583,13 @@ select {
   z-index: 2;
 }
 
-.tasks-pet-panel .pet-card__avatar {
-  font-size: 82px;
-  height: 208px;
-  margin-bottom: 36px;
-  width: 208px;
-}
+/* Usunięto niestandardowe style awatara dla tasks-pet-panel, by był jak ShopPage */
 
 .home-pet-card .pet-card__avatar {
-  font-size: 86px;
-  height: 216px;
-  margin-bottom: 0;
-  width: 216px;
+  font-size: 72px;
+  height: 180px;
+  margin-bottom: 24px;
+  width: 180px;
 }
 
 .tasks-pet-panel .pet-card__avatar::before,
@@ -622,7 +629,7 @@ select {
 }
 
 .tasks-pet-panel .stat-bar__track {
-  height: 10px;
+  height: 16px;
 }
 
 .home-pet-card .stat-bar {
@@ -635,7 +642,7 @@ select {
 }
 
 .home-pet-card .stat-bar__track {
-  height: 10px;
+  height: 16px;
 }
 
 .stat-bar {
@@ -654,7 +661,7 @@ select {
 .stat-bar span,
 .stat-bar__gain {
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -678,7 +685,7 @@ select {
 .stat-bar__track {
   background: rgba(6, 43, 95, 0.72);
   border-radius: var(--radius-pill);
-  height: 8px;
+  height: 14px;
   overflow: hidden;
 }
 
@@ -718,7 +725,7 @@ select {
 }
 
 .home-content .section-heading {
-  margin: 56px 0 22px;
+  margin: 0 0 22px;
   max-width: 1180px;
   width: 100%;
 }
@@ -736,12 +743,50 @@ select {
 
 .section-heading a {
   color: var(--accent);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .task-list {
   display: grid;
   gap: 24px;
+}
+
+.task-list--scrollable {
+  max-height: calc(100vh - 380px);
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.task-list--scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+.task-list--scrollable::-webkit-scrollbar-track {
+  background: rgba(0, 31, 70, 0.4);
+  border-radius: 4px;
+}
+.task-list--scrollable::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.subtask-list {
+  display: grid;
+  gap: 16px;
+  margin-left: 48px;
+  margin-top: -12px;
+  margin-bottom: 8px;
+}
+
+.subtask-list .task-card {
+  min-height: 90px;
+  padding: 20px 24px;
+  background: linear-gradient(145deg, rgba(0, 31, 70, 0.6), rgba(0, 19, 48, 0.6));
+}
+
+.project-expand-icon {
+  font-size: 14px;
+  margin-left: 8px;
+  opacity: 0.7;
 }
 
 .tasks-main .task-list {
@@ -754,8 +799,8 @@ select {
 }
 
 .home-task-list .task-card {
-  min-height: 120px;
-  padding: 32px 36px;
+  min-height: 80px;
+  padding: 16px 20px;
 }
 
 .task-card {
@@ -763,10 +808,10 @@ select {
   border-radius: var(--radius-lg);
   cursor: pointer;
   display: grid;
-  gap: 20px;
-  grid-template-columns: 28px minmax(0, 1fr) auto;
-  min-height: 112px;
-  padding: 28px 32px;
+  gap: 16px;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  min-height: 80px;
+  padding: 16px 20px;
 }
 
 .task-card--selected {
@@ -807,7 +852,7 @@ select {
   cursor: pointer;
   display: inline-flex;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   justify-content: center;
   min-height: 36px;
   padding: 0 14px;
@@ -835,7 +880,7 @@ select {
 .task-card p {
   color: var(--accent);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 8px 0 0;
   text-transform: uppercase;
 }
@@ -863,7 +908,7 @@ select {
 .task-form-back {
   color: var(--accent);
   display: inline-flex;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 24px;
 }
 
@@ -886,12 +931,12 @@ select {
 
 .task-form-card {
   display: grid;
-  gap: 24px;
-  padding: 40px;
+  gap: 16px;
+  padding: 32px 40px;
 }
 
 .task-form-card h1 {
-  font-size: 44px;
+  font-size: 32px;
   line-height: 1.1;
   margin: 0;
 }
@@ -904,8 +949,12 @@ select {
 
 .task-form-grid {
   display: grid;
-  gap: 18px;
+  gap: 12px 18px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.task-form-grid .field__input {
+  min-height: 40px;
 }
 
 .task-form-grid .field:first-child {
@@ -929,7 +978,7 @@ select {
   border: 1px solid rgba(255, 107, 107, 0.28);
   border-radius: var(--radius-md);
   color: var(--danger);
-  font-weight: 800;
+  font-weight: 600;
   padding: 14px 16px;
 }
 
@@ -947,14 +996,14 @@ select {
 .task-form-preview > p:not(.eyebrow) {
   color: var(--accent);
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .task-form-preview .pet-card--compact {
-  margin: 24px 0 0;
+  margin: 16px 0 0;
   max-width: none;
-  padding: 28px;
+  padding: 20px;
 }
 
 .task-form-preview .pet-card__avatar {
@@ -984,13 +1033,28 @@ select {
 .segmented-control .is-active {
   background: var(--accent);
   color: var(--bg-soft);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .shop-grid {
   display: grid;
   gap: 32px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  max-height: calc(100vh - 380px);
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.shop-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.shop-grid::-webkit-scrollbar-track {
+  background: rgba(0, 31, 70, 0.4);
+  border-radius: 4px;
+}
+.shop-grid::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
 }
 
 .shop-feedback {
@@ -998,7 +1062,7 @@ select {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 24px;
   padding: 14px 18px;
 }
@@ -1079,7 +1143,7 @@ select {
   color: var(--text-muted);
   display: grid;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
   gap: 4px;
   justify-items: center;
   min-width: 96px;
@@ -1117,16 +1181,16 @@ select {
   background: var(--bg-card);
   border-radius: var(--radius-pill);
   display: inline-flex;
-  font-size: 30px;
-  gap: 34px;
+  font-size: 22px;
+  gap: 24px;
   line-height: 1;
-  margin: 0 0 36px;
-  padding: 17px 36px;
+  margin: 0 0 16px;
+  padding: 12px 24px;
 }
 
 .session-task span {
   color: var(--text-muted);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .session-task strong {
@@ -1142,17 +1206,17 @@ select {
   box-shadow: 0 0 0 18px rgba(6, 43, 95, 0.14);
   display: flex;
   justify-content: center;
-  min-height: 220px;
+  min-height: 180px;
   max-width: 760px;
-  padding: 24px 54px;
+  padding: 16px 36px;
   width: min(760px, 84vw);
 }
 
 .session-card .session-timer {
   color: var(--text);
   display: block;
-  font-size: 134px;
-  font-weight: 900;
+  font-size: 104px;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 0.95;
   margin: 0;
@@ -1170,16 +1234,17 @@ select {
   align-items: center;
   background: transparent;
   display: flex;
-  height: 236px;
+  height: 180px;
   justify-content: center;
-  margin: 46px auto 24px;
+  margin: 20px auto 16px;
   overflow: hidden;
-  width:430px ;
+  width: 430px;
 }
 
 .session-pet-frame img,
 .session-pet-frame video,
 .session-state__pet img {
+  border-radius: 50%;
   display: block;
   height: 100%;
   object-fit: cover;
@@ -1199,7 +1264,7 @@ select {
 
 .session-controls {
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 32px;
+  margin-top: 16px;
 }
 
 .session-controls--icon {
@@ -1367,7 +1432,7 @@ select {
 .session-complete__coins span {
   color: var(--text-muted);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1472,11 +1537,12 @@ select {
   }
 
   .task-form-card {
-    padding: 28px;
+    gap: 16px;
+    padding: 24px;
   }
 
   .task-form-card h1 {
-    font-size: 34px;
+    font-size: 28px;
   }
 
   .task-form-preview {
@@ -1558,4 +1624,8 @@ select {
     min-width: 132px;
     padding: 0 24px;
   }
+}
+
+h1, h2 {
+  font-weight: 600;
 }

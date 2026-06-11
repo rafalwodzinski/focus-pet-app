@@ -1,5 +1,15 @@
 export const mockTasks = [
   {
+    id: 'project-1',
+    title: 'Prepare Focus Pet presentation',
+    type: 'projects',
+    category: 'Project',
+    priority: 'medium',
+    sessionLength: 25,
+    deadline: '2026-06-02T12:00:00',
+    isDone: false,
+  },
+  {
     id: 'task-1',
     title: 'Finish the Serene Garden UI Kit',
     type: 'tasks',
@@ -8,7 +18,18 @@ export const mockTasks = [
     sessionLength: 45,
     deadline: '2026-05-30T18:00:00',
     isDone: false,
-    petName: 'Finley',
+    projectId: 'project-1',
+  },
+  {
+    id: 'task-3',
+    title: 'Create Presentation Slides',
+    type: 'tasks',
+    category: 'Deep Work',
+    priority: 'high',
+    sessionLength: 30,
+    deadline: '2026-05-30T18:00:00',
+    isDone: false,
+    projectId: 'project-1',
   },
   {
     id: 'task-2',
@@ -19,17 +40,5 @@ export const mockTasks = [
     sessionLength: 5,
     deadline: '2026-05-24T10:00:00',
     isDone: false,
-    petName: 'Kumo',
-  },
-  {
-    id: 'project-1',
-    title: 'Prepare Focus Pet presentation',
-    type: 'projects',
-    category: 'Project',
-    priority: 'medium',
-    sessionLength: 25,
-    deadline: '2026-06-02T12:00:00',
-    isDone: false,
-    petName: 'Kumo',
   },
 ];

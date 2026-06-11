@@ -150,12 +150,21 @@ function ShopPage() {
 
         <aside>
           <PetCard compact pet={pet} statGains={lastStatGain} />
+          
+          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {pet.hp <= 0 ? (
+              <Link state={{ isRegeneration: true }} to="/session">
+                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Regeneration (30m)</Button>
+              </Link>
+            ) : (
+              <Link to="/session">
+                <Button>Start Session</Button>
+              </Link>
+            )}
+          </div>
         </aside>
       </section>
 
-      <Link className="floating-action" to="/session">
-        <Button>Start Session</Button>
-      </Link>
       <BottomNav />
     </main>
   );

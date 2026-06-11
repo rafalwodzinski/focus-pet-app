@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-function Header({ coins = 0, userName = 'MochiMaster', userLevel = 'Level 12 Guardian' }) {
+function Header({ coins = 0, userLevel = 'Level 1' }) {
+  const { currentUser } = useAuth();
+  
+  // Pobieramy imię z konta Google. Jeśli z jakiegoś powodu jest puste,
+  // lub to rejestracja bez nazwy, wyświetlamy "Konto Testowe".
+  const displayName = currentUser?.displayName || currentUser?.email?.split('@')[0] || 'Konto Testowe';
   return (
     <header className="app-header">
       <Link className="brand" to="/home">
@@ -13,11 +19,14 @@ function Header({ coins = 0, userName = 'MochiMaster', userLevel = 'Level 12 Gua
       </div>
 
       <div className="app-header__profile">
+        <Link className="logout-link" to="/history" style={{ marginRight: '16px' }}>
+          History
+        </Link>
         <Link className="logout-link" to="/logout">
           Log out
         </Link>
         <div>
-          <strong>{userName}</strong>
+          <strong>{displayName}</strong>
           <span>{userLevel}</span>
         </div>
       </div>

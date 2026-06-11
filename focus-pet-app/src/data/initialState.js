@@ -14,8 +14,8 @@ export const initialAppState = {
     id: 'user-1',
     name: 'MochiMaster',
     email: 'cosmic@focuspet.com',
-    level: 12,
-    title: 'Level 12 Guardian',
+    level: 1,
+    title: 'Level 1',
   },
   coins: 1250,
   pet: {
@@ -33,4 +33,5 @@ export const initialAppState = {
   shopItems: mockShopItems,
   inventory: ['item-1'],
   currentSession: null,
+  history: [],
 };

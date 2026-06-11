@@ -21,18 +21,22 @@ function FocusSessionPage() {
   const [remainingSeconds, setRemainingSeconds] = useState(null);
   const [completedSession, setCompletedSession] = useState(null);
   const [isZenSoundPlaying, setIsZenSoundPlaying] = useState(false);
+  const isRegeneration = location.state?.isRegeneration || false;
   const selectedTaskFromRoute = location.state?.task;
   const selectedTaskId = location.state?.taskId || selectedTaskFromRoute?.id;
-  const task =
+  const task = isRegeneration ? { title: 'Regeneration Session', sessionLength: 30, id: 'regen' } : (
     appState?.tasks?.find((item) => item.id === selectedTaskId) ||
     selectedTaskFromRoute ||
     appState?.tasks?.[0] ||
-    mockTasks[0];
+    mockTasks[0]
+  );
   const sessionDurationSeconds = (task.sessionLength || 25) * 60;
 
   const completeSession = useCallback((focusSeconds) => {
     const finalFocusSeconds = Math.max(focusSeconds, 0);
-    const rewards = calculateSessionRewards(finalFocusSeconds);
+    const rewards = isRegeneration
+      ? { coins: 0, xp: 0, hp: 50 }
+      : calculateSessionRewards(finalFocusSeconds);
 
     setCompletedSession({
       focusSeconds: finalFocusSeconds,
@@ -44,6 +48,20 @@ function FocusSessionPage() {
       return;
     }
 
+    const nextTasks = isRegeneration ? appState.tasks : appState.tasks.map((item) =>
+      item.id === task.id ? { ...item, isDone: true } : item
+    );
+
+    const newHistoryEntry = {
+      id: `hist-${Date.now()}`,
+      date: new Date().toISOString(),
+      taskName: task.title,
+      status: 'complete',
+      focusSeconds: finalFocusSeconds,
+      rewards,
+      isRegeneration,
+    };
+
     const nextState = {
       ...appState,
       coins: appState.coins + rewards.coins,
@@ -52,14 +70,56 @@ function FocusSessionPage() {
         hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
         xp: (appState.pet?.xp || 0) + rewards.xp,
       },
-      tasks: appState.tasks.map((item) =>
-        item.id === task.id ? { ...item, isDone: true } : item
-      ),
+      tasks: nextTasks,
+      history: [newHistoryEntry, ...(appState.history || [])],
     };
 
     setAppState(nextState);
     saveUserData(currentUser.uid, nextState);
-  }, [appState, currentUser, task.id]);
+  }, [appState, currentUser, task.id, isRegeneration]);
+
+  const failSession = useCallback(() => {
+    const elapsedSeconds = sessionDurationSeconds - (remainingSeconds || 0);
+    const finalFocusSeconds = Math.max(elapsedSeconds, 0);
+
+    const rewards = isRegeneration
+      ? { coins: 0, xp: 0, hp: Math.floor((finalFocusSeconds / sessionDurationSeconds) * 50) }
+      : calculateSessionRewards(finalFocusSeconds);
+
+    setCompletedSession({
+      focusSeconds: finalFocusSeconds,
+      rewards,
+    });
+    setSessionState('failed');
+
+    if (!appState || !currentUser) {
+      return;
+    }
+
+    const newHistoryEntry = {
+      id: `hist-${Date.now()}`,
+      date: new Date().toISOString(),
+      taskName: task.title,
+      status: 'failed',
+      focusSeconds: finalFocusSeconds,
+      rewards,
+      isRegeneration,
+    };
+
+    const nextState = {
+      ...appState,
+      coins: appState.coins + rewards.coins,
+      pet: {
+        ...appState.pet,
+        hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
+        xp: (appState.pet?.xp || 0) + rewards.xp,
+      },
+      history: [newHistoryEntry, ...(appState.history || [])],
+    };
+
+    setAppState(nextState);
+    saveUserData(currentUser.uid, nextState);
+  }, [appState, currentUser, isRegeneration, remainingSeconds, sessionDurationSeconds, task.title]);
 
   useEffect(() => {
     async function fetchData() {
@@ -96,6 +156,27 @@ function FocusSessionPage() {
       completeSession(sessionDurationSeconds);
     }
   }, [completeSession, completedSession, remainingSeconds, sessionDurationSeconds, sessionState]);
+
+  useEffect(() => {
+    let timeoutId;
+    function handleVisibilityChange() {
+      if (sessionState !== 'running') return;
+
+      if (document.hidden) {
+        timeoutId = setTimeout(() => {
+          failSession(20);
+        }, 60 * 1000);
+      } else {
+        if (timeoutId) clearTimeout(timeoutId);
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [sessionState, failSession]);
 
   useEffect(() => () => {
     if (zenAudioRef.current) {
@@ -139,7 +220,7 @@ function FocusSessionPage() {
   }
 
   const petType = appState.pet?.type || 'fox';
-  const petName = task.petName || appState.pet?.name || 'Finley';
+  const petName = appState.pet?.name || 'Finley';
   const petImage = `${process.env.PUBLIC_URL}/assets/pets/${petType}/sleeping.png`;
   const completedFocusSeconds = completedSession?.focusSeconds ?? sessionDurationSeconds;
   const focusTime = formatSeconds(completedFocusSeconds);
@@ -157,7 +238,7 @@ function FocusSessionPage() {
     );
   }
 
-  if (sessionState === 'complete') {
+  if (sessionState === 'complete' || sessionState === 'failed') {
     return (
       <SessionCompletePage
         appState={appState}
@@ -165,6 +246,7 @@ function FocusSessionPage() {
         onRestart={handleRestart}
         petName={petName}
         rewards={rewards}
+        isFailed={sessionState === 'failed'}
       />
     );
   }
@@ -183,13 +265,13 @@ function FocusSessionPage() {
 
         <div className="session-pet-frame">
           <video
-         autoPlay
-        loop
-    muted
-    playsInline
-    aria-hidden="true"
-  >
-    <source src={`${process.env.PUBLIC_URL}/assets/pets/cat/sleep-video.mp4`} type="video/mp4" />
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          >
+    <source src={`${process.env.PUBLIC_URL}/assets/pets/${petType}/sleep-video.mp4`} type="video/mp4" />
   </video>
 </div>
 
@@ -199,7 +281,7 @@ function FocusSessionPage() {
         <div className="session-controls session-controls--icon">
           <button
             className="session-icon-action"
-            onClick={() => completeSession(sessionDurationSeconds - (remainingSeconds ?? sessionDurationSeconds))}
+            onClick={() => failSession(20)}
             type="button"
           >
             <span>
