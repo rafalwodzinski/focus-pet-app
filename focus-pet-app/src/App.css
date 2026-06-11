@@ -392,7 +392,7 @@ select {
 
 .pet-choice__image {
   background: rgba(0, 14, 38, 0.78);
-  border-radius: 8px;
+  border-radius: 50%;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
   display: block;
   height: 152px;
@@ -563,6 +563,7 @@ select {
 }
 
 .pet-card__image {
+  border-radius: 50%;
   display: block;
   height: 100%;
   object-fit: contain;
@@ -1238,6 +1239,7 @@ select {
 .session-pet-frame img,
 .session-pet-frame video,
 .session-state__pet img {
+  border-radius: 50%;
   display: block;
   height: 100%;
   object-fit: cover;
