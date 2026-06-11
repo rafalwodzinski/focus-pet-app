@@ -26,6 +26,7 @@ function OnboardingPage() {
         ...initialAppState.pet,
         type: selectedPet,
         name: petName,
+        stage: 'baby',
         stageLabel: `Baby ${chosenPetData.label}`
       }
     };

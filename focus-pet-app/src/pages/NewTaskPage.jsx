@@ -127,7 +127,6 @@ const NewTaskPage = () => {
       sessionLength: Number(taskForm.sessionLength) || 25,
       deadline: taskForm.deadline,
       isDone: taskToEdit?.isDone || false,
-      petName: taskToEdit?.petName || appState.pet?.name || 'Focus Pet',
     };
 
     const nextTasks = taskToEdit

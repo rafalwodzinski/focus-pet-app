@@ -139,7 +139,7 @@ function FocusSessionPage() {
   }
 
   const petType = appState.pet?.type || 'fox';
-  const petName = task.petName || appState.pet?.name || 'Finley';
+  const petName = appState.pet?.name || 'Finley';
   const petImage = `${process.env.PUBLIC_URL}/assets/pets/${petType}/sleeping.png`;
   const completedFocusSeconds = completedSession?.focusSeconds ?? sessionDurationSeconds;
   const focusTime = formatSeconds(completedFocusSeconds);
@@ -188,8 +188,7 @@ function FocusSessionPage() {
     muted
     playsInline
     aria-hidden="true"
-  >
-    <source src={`${process.env.PUBLIC_URL}/assets/pets/cat/sleep-video.mp4`} type="video/mp4" />
+    <source src={`${process.env.PUBLIC_URL}/assets/pets/${petType}/sleep-video.mp4`} type="video/mp4" />
   </video>
 </div>
 

@@ -8,7 +8,6 @@ export const mockTasks = [
     sessionLength: 25,
     deadline: '2026-06-02T12:00:00',
     isDone: false,
-    petName: 'Kumo',
   },
   {
     id: 'task-1',
@@ -19,7 +18,6 @@ export const mockTasks = [
     sessionLength: 45,
     deadline: '2026-05-30T18:00:00',
     isDone: false,
-    petName: 'Finley',
     projectId: 'project-1',
   },
   {
@@ -31,7 +29,6 @@ export const mockTasks = [
     sessionLength: 30,
     deadline: '2026-05-30T18:00:00',
     isDone: false,
-    petName: 'Kumo',
     projectId: 'project-1',
   },
   {
@@ -43,6 +40,5 @@ export const mockTasks = [
     sessionLength: 5,
     deadline: '2026-05-24T10:00:00',
     isDone: false,
-    petName: 'Kumo',
   },
 ];
