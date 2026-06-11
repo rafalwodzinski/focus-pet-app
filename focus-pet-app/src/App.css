@@ -1175,11 +1175,11 @@ select {
   background: var(--bg-card);
   border-radius: var(--radius-pill);
   display: inline-flex;
-  font-size: 30px;
-  gap: 34px;
+  font-size: 22px;
+  gap: 24px;
   line-height: 1;
-  margin: 0 0 36px;
-  padding: 17px 36px;
+  margin: 0 0 16px;
+  padding: 12px 24px;
 }
 
 .session-task span {
@@ -1200,16 +1200,16 @@ select {
   box-shadow: 0 0 0 18px rgba(6, 43, 95, 0.14);
   display: flex;
   justify-content: center;
-  min-height: 220px;
+  min-height: 180px;
   max-width: 760px;
-  padding: 24px 54px;
+  padding: 16px 36px;
   width: min(760px, 84vw);
 }
 
 .session-card .session-timer {
   color: var(--text);
   display: block;
-  font-size: 134px;
+  font-size: 104px;
   font-weight: 900;
   letter-spacing: 0;
   line-height: 0.95;
@@ -1228,11 +1228,11 @@ select {
   align-items: center;
   background: transparent;
   display: flex;
-  height: 236px;
+  height: 180px;
   justify-content: center;
-  margin: 46px auto 24px;
+  margin: 20px auto 16px;
   overflow: hidden;
-  width:430px ;
+  width: 430px;
 }
 
 .session-pet-frame img,
@@ -1257,7 +1257,7 @@ select {
 
 .session-controls {
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 32px;
+  margin-top: 16px;
 }
 
 .session-controls--icon {
