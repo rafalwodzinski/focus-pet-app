@@ -33,4 +33,5 @@ export const initialAppState = {
   shopItems: mockShopItems,
   inventory: ['item-1'],
   currentSession: null,
+  history: [],
 };

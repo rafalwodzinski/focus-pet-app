@@ -52,6 +52,16 @@ function FocusSessionPage() {
       item.id === task.id ? { ...item, isDone: true } : item
     );
 
+    const newHistoryEntry = {
+      id: `hist-${Date.now()}`,
+      date: new Date().toISOString(),
+      taskName: task.title,
+      status: 'complete',
+      focusSeconds: finalFocusSeconds,
+      rewards,
+      isRegeneration,
+    };
+
     const nextState = {
       ...appState,
       coins: appState.coins + rewards.coins,
@@ -61,6 +71,7 @@ function FocusSessionPage() {
         xp: (appState.pet?.xp || 0) + rewards.xp,
       },
       tasks: nextTasks,
+      history: [newHistoryEntry, ...(appState.history || [])],
     };
 
     setAppState(nextState);
@@ -79,12 +90,23 @@ function FocusSessionPage() {
       return;
     }
 
+    const newHistoryEntry = {
+      id: `hist-${Date.now()}`,
+      date: new Date().toISOString(),
+      taskName: task.title,
+      status: 'failed',
+      focusSeconds: 0,
+      rewards,
+      isRegeneration: false,
+    };
+
     const nextState = {
       ...appState,
       pet: {
         ...appState.pet,
         hp: Math.max((appState.pet?.hp || 0) - penaltyHp, 0),
       },
+      history: [newHistoryEntry, ...(appState.history || [])],
     };
 
     setAppState(nextState);

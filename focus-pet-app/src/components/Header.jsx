@@ -19,6 +19,9 @@ function Header({ coins = 0, userLevel = 'Level 12 Guardian' }) {
       </div>
 
       <div className="app-header__profile">
+        <Link className="logout-link" to="/history" style={{ marginRight: '16px' }}>
+          History
+        </Link>
         <Link className="logout-link" to="/logout">
           Log out
         </Link>
