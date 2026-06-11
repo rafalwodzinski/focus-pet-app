@@ -485,7 +485,7 @@ select {
 .home-content {
   align-items: start;
   display: grid;
-  gap: 32px;
+  gap: 24px;
   grid-template-columns: minmax(0, 1fr) 340px;
   min-height: 0;
 }
@@ -504,9 +504,9 @@ select {
 
 .pet-card {
   border-radius: var(--radius-lg);
-  margin: 24px auto;
+  margin: 16px auto;
   max-width: 920px;
-  padding: 40px;
+  padding: 24px;
   text-align: center;
 }
 
@@ -519,7 +519,7 @@ select {
 }
 
 .home-pet-card .pet-card {
-  padding: 40px;
+  padding: 32px 24px;
   text-align: center;
   width: 100%;
 }
@@ -586,10 +586,10 @@ select {
 /* Usunięto niestandardowe style awatara dla tasks-pet-panel, by był jak ShopPage */
 
 .home-pet-card .pet-card__avatar {
-  font-size: 82px;
-  height: 208px;
-  margin-bottom: 36px;
-  width: 208px;
+  font-size: 72px;
+  height: 180px;
+  margin-bottom: 24px;
+  width: 180px;
 }
 
 .tasks-pet-panel .pet-card__avatar::before,
