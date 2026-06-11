@@ -14,6 +14,7 @@ function SessionCompletePage({
   focusTime = defaultFocusTime,
   onRestart,
   rewards = defaultRewards,
+  isFailed = false,
 }) {
   const { coins, user } = appState;
   const restartButton = (
@@ -27,9 +28,9 @@ function SessionCompletePage({
       <Header coins={coins} userLevel={user.title} userName={user.name} />
 
       <section className="session-state-card session-complete-card">
-        <Sparkles className="session-complete__sparkle" aria-hidden="true" size={42} />
-        <h1>Session Complete</h1>
-        <p>Your sanctuary has evolved through your discipline.</p>
+        <Sparkles className="session-complete__sparkle" aria-hidden="true" size={42} style={{ color: isFailed ? 'var(--danger)' : 'inherit' }} />
+        <h1 style={{ color: isFailed ? 'var(--danger)' : 'inherit' }}>{isFailed ? 'Session Failed' : 'Session Complete'}</h1>
+        <p>{isFailed ? 'You lost focus for too long.' : 'Your sanctuary has evolved through your discipline.'}</p>
 
         <div className="session-complete__stats">
           <div className="session-complete__time">
@@ -39,11 +40,11 @@ function SessionCompletePage({
 
           <div className="session-complete__resilience">
             <div>
-              <span>Resilience Gained</span>
-              <strong>+{rewards.hp} HP</strong>
+              <span>{isFailed ? 'Resilience Lost' : 'Resilience Gained'}</span>
+              <strong style={{ color: isFailed ? 'var(--danger)' : 'inherit' }}>{isFailed ? '' : '+'}{rewards.hp} HP</strong>
             </div>
             <div className="session-complete__hp-track">
-              <span style={{ width: `${Math.min(rewards.hp * 4, 100)}%` }} />
+              <span style={{ width: `${Math.min(Math.abs(rewards.hp) * 4, 100)}%`, background: isFailed ? 'var(--danger)' : 'var(--accent)' }} />
             </div>
           </div>
         </div>

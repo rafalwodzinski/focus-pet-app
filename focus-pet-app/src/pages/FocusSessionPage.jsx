@@ -61,6 +61,30 @@ function FocusSessionPage() {
     saveUserData(currentUser.uid, nextState);
   }, [appState, currentUser, task.id]);
 
+  const failSession = useCallback((penaltyHp = 15) => {
+    const rewards = { coins: 0, xp: 0, hp: -penaltyHp };
+    setCompletedSession({
+      focusSeconds: 0,
+      rewards,
+    });
+    setSessionState('failed');
+
+    if (!appState || !currentUser) {
+      return;
+    }
+
+    const nextState = {
+      ...appState,
+      pet: {
+        ...appState.pet,
+        hp: Math.max((appState.pet?.hp || 0) - penaltyHp, 0),
+      },
+    };
+
+    setAppState(nextState);
+    saveUserData(currentUser.uid, nextState);
+  }, [appState, currentUser]);
+
   useEffect(() => {
     async function fetchData() {
       if (!currentUser) return;
@@ -96,6 +120,27 @@ function FocusSessionPage() {
       completeSession(sessionDurationSeconds);
     }
   }, [completeSession, completedSession, remainingSeconds, sessionDurationSeconds, sessionState]);
+
+  useEffect(() => {
+    let timeoutId;
+    function handleVisibilityChange() {
+      if (sessionState !== 'running') return;
+
+      if (document.hidden) {
+        timeoutId = setTimeout(() => {
+          failSession(20);
+        }, 60 * 1000);
+      } else {
+        if (timeoutId) clearTimeout(timeoutId);
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [sessionState, failSession]);
 
   useEffect(() => () => {
     if (zenAudioRef.current) {
@@ -157,7 +202,7 @@ function FocusSessionPage() {
     );
   }
 
-  if (sessionState === 'complete') {
+  if (sessionState === 'complete' || sessionState === 'failed') {
     return (
       <SessionCompletePage
         appState={appState}
@@ -165,6 +210,7 @@ function FocusSessionPage() {
         onRestart={handleRestart}
         petName={petName}
         rewards={rewards}
+        isFailed={sessionState === 'failed'}
       />
     );
   }
@@ -198,7 +244,7 @@ function FocusSessionPage() {
         <div className="session-controls session-controls--icon">
           <button
             className="session-icon-action"
-            onClick={() => completeSession(sessionDurationSeconds - (remainingSeconds ?? sessionDurationSeconds))}
+            onClick={() => failSession(20)}
             type="button"
           >
             <span>
