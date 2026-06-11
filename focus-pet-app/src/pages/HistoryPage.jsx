@@ -49,9 +49,8 @@ function HistoryPage() {
         ) : (
           <div className="task-list task-list--scrollable">
             {history.map((record) => (
-              <article key={record.id} className="task-card" style={{ cursor: 'default' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
+              <article key={record.id} className="task-card" style={{ cursor: 'default', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ flex: 1, minWidth: 0, paddingRight: '16px' }}>
                     <h3 style={{ color: record.status === 'failed' ? 'var(--danger)' : 'inherit' }}>
                       {record.taskName} {record.isRegeneration ? '(Regeneration)' : ''}
                     </h3>
@@ -70,7 +69,6 @@ function HistoryPage() {
                       </>
                     )}
                   </div>
-                </div>
               </article>
             ))}
           </div>

@@ -111,12 +111,19 @@ select {
 }
 
 .auth-page,
-.app-shell,
 .center-page,
 .onboarding-page,
 .session-page {
   background: var(--bg);
   min-height: 100vh;
+}
+
+.app-shell {
+  background: var(--bg);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .auth-page--split {
@@ -441,6 +448,9 @@ select {
 
 .page-content {
   margin-top: 32px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .page-content--two-columns {
@@ -459,6 +469,9 @@ select {
 .tasks-main {
   max-width: none;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .tasks-pet-panel {
@@ -474,8 +487,8 @@ select {
   align-items: start;
   display: grid;
   gap: 32px;
-  grid-template-columns: 340px minmax(0, 1fr);
-  min-height: calc(100vh - 260px);
+  grid-template-columns: minmax(0, 1fr) 340px;
+  min-height: 0;
 }
 
 .home-content > h1 {
@@ -504,8 +517,6 @@ select {
 
 .tasks-pet-panel .pet-card--compact {
   margin-top: 28px;
-  min-height: 500px;
-  padding: 60px 48px;
 }
 
 .home-pet-card .pet-card {
@@ -574,17 +585,17 @@ select {
 }
 
 .tasks-pet-panel .pet-card__avatar {
-  font-size: 82px;
-  height: 208px;
-  margin-bottom: 36px;
-  width: 208px;
-}
-
-.home-pet-card .pet-card__avatar {
   font-size: 64px;
   height: 160px;
   margin: 0 auto 24px;
   width: 160px;
+}
+
+.home-pet-card .pet-card__avatar {
+  font-size: 82px;
+  height: 208px;
+  margin-bottom: 36px;
+  width: 208px;
 }
 
 .tasks-pet-panel .pet-card__avatar::before,

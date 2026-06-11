@@ -14,6 +14,7 @@ import ShopPage from './pages/ShopPage';
 import TasksPage from './pages/TasksPage';
 import NotFoundPage from './pages/NotFoundPage';
 import NewTaskPage from './pages/NewTaskPage';
+import NewProjectPage from './pages/NewProjectPage';
 import FilterTasksPage from './pages/FilterTasksPage';
 import FilterProjectsPage from './pages/FilterProjectsPage';
 import ShopFoodPage from './pages/ShopFoodPage';
@@ -49,6 +50,7 @@ function App() {
           <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
           <Route path="/tasks" element={<PrivateRoute><TasksPage /></PrivateRoute>} />
           <Route path="/tasks/new" element={<PrivateRoute><NewTaskPage /></PrivateRoute>} />
+          <Route path="/projects/new" element={<PrivateRoute><NewProjectPage /></PrivateRoute>} />
           <Route path="/tasks/filter/tasks" element={<PrivateRoute><FilterTasksPage /></PrivateRoute>} />
           <Route path="/tasks/filter/projects" element={<PrivateRoute><FilterProjectsPage /></PrivateRoute>} />
           <Route path="/shop" element={<PrivateRoute><ShopPage /></PrivateRoute>} />

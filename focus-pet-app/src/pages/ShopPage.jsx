@@ -146,15 +146,22 @@ function ShopPage() {
               <ShopItemCard item={item} key={item.id} onBuy={handleBuyItem} />
             ))}
           </div>
-          <div style={{ marginTop: '32px' }}>
-            <Link to="/session">
-              <Button>Start Session</Button>
-            </Link>
-          </div>
         </div>
 
         <aside>
           <PetCard compact pet={pet} statGains={lastStatGain} />
+          
+          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column' }}>
+            {pet.hp <= 0 ? (
+              <Link state={{ isRegeneration: true }} to="/session">
+                <Button style={{ background: 'var(--danger)', color: '#fff', width: '100%' }}>Regeneration (30m)</Button>
+              </Link>
+            ) : (
+              <Link to="/session">
+                <Button style={{ width: '100%' }}>Start Session</Button>
+              </Link>
+            )}
+          </div>
         </aside>
       </section>
 

@@ -15,11 +15,11 @@ function HomePage() {
   const [randomProTip, setRandomProTip] = useState('');
 
   const proTips = [
-    "Pamiętaj o nawodnieniu! Wypij szklankę wody.",
-    "Krótka przerwa na rozciąganie poprawi twoje krążenie.",
-    "Magiczne zwierzaki rosną szybciej, gdy skupiasz się na jednym zadaniu naraz.",
-    "Odłóż telefon z dala od biurka, aby uniknąć pokusy.",
-    "Głębokie skupienie przez 60 minut daje najlepsze efekty i nagrody."
+    "Stay hydrated! Drink a glass of water.",
+    "A short stretch break will improve your circulation.",
+    "Magical pets grow faster when you focus on one task at a time.",
+    "Keep your phone away from your desk to avoid temptation.",
+    "Deep focus for 60 minutes yields the best results and rewards."
   ];
 
   useEffect(() => {
@@ -62,14 +62,6 @@ function HomePage() {
           <h1>Welcome!</h1>
         </div>
         
-        <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginBottom: '24px', borderLeft: '4px solid var(--accent)' }}>
-          <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
-          <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>
-        </div>
-        <div className="home-pet-card">
-          <PetCard pet={pet} />
-        </div>
-
         <div className="home-tasks-container">
           <div className="section-heading">
             <h2>Tasks</h2>
@@ -99,7 +91,14 @@ function HomePage() {
             ))}
           </div>
 
-          <div style={{ marginTop: '32px' }}>
+          </div>
+
+          <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginTop: '24px', borderLeft: '4px solid var(--accent)' }}>
+            <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
+            <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>
+          </div>
+
+          <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'flex-end' }}>
             {pet.hp <= 0 ? (
               <Link state={{ isRegeneration: true }} to="/session">
                 <Button style={{ background: 'var(--danger)', color: '#fff' }}>Start Regeneration Session (30m)</Button>
@@ -110,6 +109,10 @@ function HomePage() {
               </Link>
             )}
           </div>
+        </div>
+        
+        <div className="home-pet-card">
+          <PetCard pet={pet} />
         </div>
       </section>
 

@@ -89,7 +89,6 @@ const NewTaskPage = () => {
     setTaskForm((currentForm) => ({
       ...currentForm,
       [name]: value,
-      ...(name === 'type' ? { category: value === 'projects' ? 'Project' : 'Deep Work' } : {}),
     }));
   }
 
@@ -121,7 +120,7 @@ const NewTaskPage = () => {
       ...taskToEdit,
       id: taskId,
       title: taskForm.title.trim(),
-      type: taskForm.type,
+      type: 'tasks',
       category: taskForm.category,
       priority: taskForm.priority,
       sessionLength: Number(taskForm.sessionLength) || 25,
@@ -195,22 +194,7 @@ const NewTaskPage = () => {
                 value={taskForm.title}
               />
 
-              <label className="field" htmlFor="taskType">
-                <span className="field__label">Type</span>
-                <select
-                  className="field__input field__select"
-                  id="taskType"
-                  name="type"
-                  onChange={handleFormChange}
-                  value={taskForm.type}
-                >
-                  {taskTypes.map((type) => (
-                    <option key={type.value} value={type.value}>
-                      {type.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
+
 
               <label className="field" htmlFor="taskCategory">
                 <span className="field__label">Category</span>
