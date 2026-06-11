@@ -22,7 +22,7 @@
 }
 
 body {
-  background: #1f1f1f;
+  background: var(--bg);
   color: var(--text);
   font-family: Inter, Poppins, Arial, sans-serif;
   margin: 0;
