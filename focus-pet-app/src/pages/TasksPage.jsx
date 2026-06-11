@@ -192,29 +192,31 @@ function TasksPage() {
               </div>
             )}
           </div>
+
+          <div style={{ marginTop: '32px', display: 'flex', gap: '16px' }}>
+            {activeFilter === 'Projects' ? (
+              <Link to="/projects/new">
+                <Button>+ Add Project</Button>
+              </Link>
+            ) : (
+              <Link to="/tasks/new">
+                <Button>+ Add Task</Button>
+              </Link>
+            )}
+          </div>
         </div>
 
         <aside className="tasks-pet-panel">
           <PetCard compact pet={pet} />
           
-          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {activeFilter === 'Projects' ? (
-              <Link to="/projects/new">
-                <Button style={{ width: '100%' }}>+ Add Project</Button>
-              </Link>
-            ) : (
-              <Link to="/tasks/new">
-                <Button style={{ width: '100%' }}>+ Add Task</Button>
-              </Link>
-            )}
-
+          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {pet.hp <= 0 ? (
               <Link state={{ isRegeneration: true }} to="/session">
-                <Button style={{ background: 'var(--danger)', color: '#fff', width: '100%' }}>Regeneration (30m)</Button>
+                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Regeneration (30m)</Button>
               </Link>
             ) : (
               <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
-                <Button style={{ width: '100%' }}>Start Session</Button>
+                <Button>Start Session</Button>
               </Link>
             )}
           </div>

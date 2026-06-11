@@ -78,10 +78,16 @@ function FocusSessionPage() {
     saveUserData(currentUser.uid, nextState);
   }, [appState, currentUser, task.id, isRegeneration]);
 
-  const failSession = useCallback((penaltyHp = 15) => {
-    const rewards = { coins: 0, xp: 0, hp: -penaltyHp };
+  const failSession = useCallback(() => {
+    const elapsedSeconds = sessionDurationSeconds - (remainingSeconds || 0);
+    const finalFocusSeconds = Math.max(elapsedSeconds, 0);
+
+    const rewards = isRegeneration
+      ? { coins: 0, xp: 0, hp: Math.floor((finalFocusSeconds / sessionDurationSeconds) * 50) }
+      : calculateSessionRewards(finalFocusSeconds);
+
     setCompletedSession({
-      focusSeconds: 0,
+      focusSeconds: finalFocusSeconds,
       rewards,
     });
     setSessionState('failed');
@@ -95,23 +101,25 @@ function FocusSessionPage() {
       date: new Date().toISOString(),
       taskName: task.title,
       status: 'failed',
-      focusSeconds: 0,
+      focusSeconds: finalFocusSeconds,
       rewards,
-      isRegeneration: false,
+      isRegeneration,
     };
 
     const nextState = {
       ...appState,
+      coins: appState.coins + rewards.coins,
       pet: {
         ...appState.pet,
-        hp: Math.max((appState.pet?.hp || 0) - penaltyHp, 0),
+        hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
+        xp: (appState.pet?.xp || 0) + rewards.xp,
       },
       history: [newHistoryEntry, ...(appState.history || [])],
     };
 
     setAppState(nextState);
     saveUserData(currentUser.uid, nextState);
-  }, [appState, currentUser]);
+  }, [appState, currentUser, isRegeneration, remainingSeconds, sessionDurationSeconds, task.title]);
 
   useEffect(() => {
     async function fetchData() {

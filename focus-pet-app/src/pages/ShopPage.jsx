@@ -151,14 +151,14 @@ function ShopPage() {
         <aside>
           <PetCard compact pet={pet} statGains={lastStatGain} />
           
-          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {pet.hp <= 0 ? (
               <Link state={{ isRegeneration: true }} to="/session">
-                <Button style={{ background: 'var(--danger)', color: '#fff', width: '100%' }}>Regeneration (30m)</Button>
+                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Regeneration (30m)</Button>
               </Link>
             ) : (
               <Link to="/session">
-                <Button style={{ width: '100%' }}>Start Session</Button>
+                <Button>Start Session</Button>
               </Link>
             )}
           </div>

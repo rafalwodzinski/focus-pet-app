@@ -58,54 +58,56 @@ function HomePage() {
     <main className="app-shell">
       <Header coins={coins} userLevel={user.title} userName={user.name} />
       <section className="page-content home-content">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1>Welcome!</h1>
-        </div>
-        
-        <div className="home-tasks-container">
-          <div className="section-heading">
-            <h2>Tasks</h2>
-            <Link to="/tasks">View all</Link>
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h1>Welcome!</h1>
           </div>
+          
+          <div className="home-tasks-container" style={{ marginTop: '32px' }}>
+            <div className="section-heading">
+              <h2>Tasks</h2>
+              <Link to="/tasks">View all</Link>
+            </div>
 
-          <div className="task-list home-task-list">
-            {tasks.slice(0, 2).map((task) => (
-              <article
-                className={`task-card ${selectedTaskId === task.id ? 'task-card--selected' : ''}`.trim()}
-                key={task.id}
-                onClick={() => setSelectedTaskId(task.id)}
-              >
-                <input
-                  aria-label={`Select ${task.title}`}
-                  checked={selectedTaskId === task.id}
-                  onChange={() => setSelectedTaskId(task.id)}
-                  type="checkbox"
-                />
-                <div>
-                  <h3>{task.title}</h3>
-                  <p>
-                    {task.category} · {task.sessionLength} min session
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
+            <div className="task-list home-task-list">
+              {tasks.slice(0, 2).map((task) => (
+                <article
+                  className={`task-card ${selectedTaskId === task.id ? 'task-card--selected' : ''}`.trim()}
+                  key={task.id}
+                  onClick={() => setSelectedTaskId(task.id)}
+                >
+                  <input
+                    aria-label={`Select ${task.title}`}
+                    checked={selectedTaskId === task.id}
+                    onChange={() => setSelectedTaskId(task.id)}
+                    type="checkbox"
+                  />
+                  <div>
+                    <h3>{task.title}</h3>
+                    <p>
+                      {task.category} · {task.sessionLength} min session
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
 
-          <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginTop: '24px', borderLeft: '4px solid var(--accent)' }}>
-            <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
-            <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>
-          </div>
+            <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginTop: '24px', borderLeft: '4px solid var(--accent)' }}>
+              <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
+              <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>
+            </div>
 
-          <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'flex-end' }}>
-            {pet.hp <= 0 ? (
-              <Link state={{ isRegeneration: true }} to="/session">
-                <Button style={{ background: 'var(--danger)', color: '#fff' }}>Start Regeneration Session (30m)</Button>
-              </Link>
-            ) : (
-              <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
-                <Button>Start Session</Button>
-              </Link>
-            )}
+            <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'flex-end' }}>
+              {pet.hp <= 0 ? (
+                <Link state={{ isRegeneration: true }} to="/session">
+                  <Button style={{ background: 'var(--danger)', color: '#fff' }}>Start Regeneration Session (30m)</Button>
+                </Link>
+              ) : (
+                <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
+                  <Button>Start Session</Button>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
         

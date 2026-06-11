@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-function Header({ coins = 0, userLevel = 'Level 12 Guardian' }) {
+function Header({ coins = 0, userLevel = 'Level 1' }) {
   const { currentUser } = useAuth();
   
   // Pobieramy imię z konta Google. Jeśli z jakiegoś powodu jest puste,
