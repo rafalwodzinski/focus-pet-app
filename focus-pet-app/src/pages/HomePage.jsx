@@ -12,6 +12,19 @@ function HomePage() {
   const { currentUser } = useAuth();
   const [appState, setAppState] = useState(null);
   const [selectedTaskId, setSelectedTaskId] = useState('');
+  const [randomProTip, setRandomProTip] = useState('');
+
+  const proTips = [
+    "Pamiętaj o nawodnieniu! Wypij szklankę wody.",
+    "Krótka przerwa na rozciąganie poprawi twoje krążenie.",
+    "Magiczne zwierzaki rosną szybciej, gdy skupiasz się na jednym zadaniu naraz.",
+    "Odłóż telefon z dala od biurka, aby uniknąć pokusy.",
+    "Głębokie skupienie przez 60 minut daje najlepsze efekty i nagrody."
+  ];
+
+  useEffect(() => {
+    setRandomProTip(proTips[Math.floor(Math.random() * proTips.length)]);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -45,7 +58,14 @@ function HomePage() {
     <main className="app-shell">
       <Header coins={coins} userLevel={user.title} userName={user.name} />
       <section className="page-content home-content">
-        <h1>Welcome!</h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1>Welcome!</h1>
+        </div>
+        
+        <div style={{ backgroundColor: 'var(--bg-soft)', padding: '12px 16px', borderRadius: 'var(--radius-md)', marginBottom: '24px', borderLeft: '4px solid var(--accent)' }}>
+          <strong style={{ display: 'block', fontSize: '12px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '4px' }}>ProTip</strong>
+          <p style={{ margin: 0, fontSize: '14px', color: 'var(--text)' }}>{randomProTip}</p>
+        </div>
         <div className="home-pet-card">
           <PetCard pet={pet} />
         </div>
