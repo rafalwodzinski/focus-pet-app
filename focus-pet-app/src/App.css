@@ -1034,6 +1034,21 @@ select {
   display: grid;
   gap: 32px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  max-height: calc(100vh - 380px);
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.shop-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.shop-grid::-webkit-scrollbar-track {
+  background: rgba(0, 31, 70, 0.4);
+  border-radius: 4px;
+}
+.shop-grid::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
 }
 
 .shop-feedback {

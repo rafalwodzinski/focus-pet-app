@@ -146,6 +146,11 @@ function ShopPage() {
               <ShopItemCard item={item} key={item.id} onBuy={handleBuyItem} />
             ))}
           </div>
+          <div style={{ marginTop: '32px' }}>
+            <Link to="/session">
+              <Button>Start Session</Button>
+            </Link>
+          </div>
         </div>
 
         <aside>
@@ -153,9 +158,6 @@ function ShopPage() {
         </aside>
       </section>
 
-      <Link className="floating-action" to="/session">
-        <Button>Start Session</Button>
-      </Link>
       <BottomNav />
     </main>
   );
