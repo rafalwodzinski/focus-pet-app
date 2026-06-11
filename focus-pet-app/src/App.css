@@ -462,7 +462,6 @@ select {
 .tasks-layout {
   align-items: start;
   gap: 28px;
-  grid-template-columns: minmax(0, 1fr) 480px;
   min-height: calc(100vh - 260px);
 }
 
@@ -584,12 +583,7 @@ select {
   z-index: 2;
 }
 
-.tasks-pet-panel .pet-card__avatar {
-  font-size: 64px;
-  height: 160px;
-  margin: 0 auto 24px;
-  width: 160px;
-}
+/* Usunięto niestandardowe style awatara dla tasks-pet-panel, by był jak ShopPage */
 
 .home-pet-card .pet-card__avatar {
   font-size: 82px;

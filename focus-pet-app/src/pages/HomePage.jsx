@@ -58,12 +58,14 @@ function HomePage() {
     <main className="app-shell">
       <Header coins={coins} userLevel={user.title} userName={user.name} />
       <section className="page-content home-content">
+        <h1 style={{ gridColumn: '1 / -1' }}>Welcome!</h1>
+        
+        <div className="home-pet-card">
+          <PetCard pet={pet} />
+        </div>
+
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h1>Welcome!</h1>
-          </div>
-          
-          <div className="home-tasks-container" style={{ marginTop: '32px' }}>
+          <div className="home-tasks-container" style={{ marginTop: '0' }}>
             <div className="section-heading">
               <h2>Tasks</h2>
               <Link to="/tasks">View all</Link>
@@ -109,10 +111,6 @@ function HomePage() {
               )}
             </div>
           </div>
-        </div>
-        
-        <div className="home-pet-card">
-          <PetCard pet={pet} />
         </div>
       </section>
 
