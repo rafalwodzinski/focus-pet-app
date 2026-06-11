@@ -4,7 +4,7 @@ function StatBar({ gain = 0, label, value = 0, max = 100, tone = 'mint' }) {
   return (
     <div className="stat-bar">
       <div className="stat-bar__header">
-        <span>{label}</span>
+        <span>{label} {Math.round(value)}/{max}</span>
         {gain > 0 ? <strong className={`stat-bar__gain stat-bar__gain--${tone}`}>+{gain}</strong> : null}
       </div>
       <div className="stat-bar__track" aria-label={`${label}: ${value} z ${max}`}>

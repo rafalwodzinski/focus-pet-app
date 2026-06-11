@@ -50,38 +50,43 @@ function HomePage() {
           <PetCard pet={pet} />
         </div>
 
-        <div className="section-heading">
-          <h2>Tasks</h2>
-          <Link to="/tasks">View all</Link>
-        </div>
+        <div className="home-tasks-container">
+          <div className="section-heading">
+            <h2>Tasks</h2>
+            <Link to="/tasks">View all</Link>
+          </div>
 
-        <div className="task-list home-task-list">
-          {tasks.slice(0, 2).map((task) => (
-            <article
-              className={`task-card ${selectedTaskId === task.id ? 'task-card--selected' : ''}`.trim()}
-              key={task.id}
-              onClick={() => setSelectedTaskId(task.id)}
-            >
-              <input
-                aria-label={`Select ${task.title}`}
-                checked={selectedTaskId === task.id}
-                onChange={() => setSelectedTaskId(task.id)}
-                type="checkbox"
-              />
-              <div>
-                <h3>{task.title}</h3>
-                <p>
-                  {task.category} · {task.sessionLength} min session
-                </p>
-              </div>
-            </article>
-          ))}
+          <div className="task-list home-task-list">
+            {tasks.slice(0, 2).map((task) => (
+              <article
+                className={`task-card ${selectedTaskId === task.id ? 'task-card--selected' : ''}`.trim()}
+                key={task.id}
+                onClick={() => setSelectedTaskId(task.id)}
+              >
+                <input
+                  aria-label={`Select ${task.title}`}
+                  checked={selectedTaskId === task.id}
+                  onChange={() => setSelectedTaskId(task.id)}
+                  type="checkbox"
+                />
+                <div>
+                  <h3>{task.title}</h3>
+                  <p>
+                    {task.category} · {task.sessionLength} min session
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div style={{ marginTop: '32px' }}>
+            <Link state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
+              <Button>Start Session</Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      <Link className="floating-action" state={{ task: selectedTask, taskId: selectedTask?.id }} to="/session">
-        <Button>Start Session</Button>
-      </Link>
       <BottomNav />
     </main>
   );
