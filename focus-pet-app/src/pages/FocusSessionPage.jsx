@@ -257,11 +257,12 @@ function FocusSessionPage() {
 
         <div className="session-pet-frame">
           <video
-         autoPlay
-        loop
-    muted
-    playsInline
-    aria-hidden="true"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+          >
     <source src={`${process.env.PUBLIC_URL}/assets/pets/${petType}/sleep-video.mp4`} type="video/mp4" />
   </video>
 </div>
