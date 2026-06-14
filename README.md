@@ -191,14 +191,6 @@ Sklep - wszystkie produkty:
 
 ![Widok sklepu All](docs/screenshots/app/shop-all.png)
 
-Sklep - filtr Food:
-
-![Widok sklepu Food](docs/screenshots/app/shop-food.png)
-
-Sklep - filtr Accessories:
-
-![Widok sklepu Accessories](docs/screenshots/app/shop-accessories.png)
-
 Sesja skupienia:
 
 ![Widok sesji skupienia](docs/screenshots/app/focus-session.png)
@@ -214,10 +206,6 @@ Podsumowanie zakończonej sesji:
 Przerwana sesja i kara HP:
 
 ![Widok przerwanej sesji](docs/screenshots/app/session-failed.png)
-
-Tryb regeneracji lub hibernacji zwierzaka:
-
-![Widok regeneracji](docs/screenshots/app/regeneration.png)
 
 Historia aktywności:
 
@@ -280,4 +268,3 @@ focus-pet-app
 ```
 
 Po dodaniu zmiennych środowiskowych i wykonaniu deployu Railway generuje publiczny adres aplikacji, który można wykorzystać w Google Analytics oraz Hotjar/Contentsquare.
-
