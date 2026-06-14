@@ -4,7 +4,7 @@ import { Pause, Square, Volume2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { initialAppState } from '../data/initialState';
 import { mockTasks } from '../data/mockTasks';
-import { calculateSessionRewards } from '../utils/rewards';
+import { applyPetDamage, calculateSessionRewards } from '../utils/rewards';
 import { getUserData, saveUserData } from '../utils/storage';
 import { formatSeconds } from '../utils/timer';
 import SessionCompletePage from './SessionCompletePage';
@@ -76,15 +76,12 @@ function FocusSessionPage() {
 
     setAppState(nextState);
     saveUserData(currentUser.uid, nextState);
-  }, [appState, currentUser, task.id, isRegeneration]);
+  }, [appState, currentUser, task.id, task.title, isRegeneration]);
 
-  const failSession = useCallback(() => {
+  const failSession = useCallback((damage = 20) => {
     const elapsedSeconds = sessionDurationSeconds - (remainingSeconds || 0);
     const finalFocusSeconds = Math.max(elapsedSeconds, 0);
-
-    const rewards = isRegeneration
-      ? { coins: 0, xp: 0, hp: Math.floor((finalFocusSeconds / sessionDurationSeconds) * 50) }
-      : calculateSessionRewards(finalFocusSeconds);
+    const rewards = { coins: 0, xp: 0, hp: -Math.abs(damage) };
 
     setCompletedSession({
       focusSeconds: finalFocusSeconds,
@@ -108,12 +105,7 @@ function FocusSessionPage() {
 
     const nextState = {
       ...appState,
-      coins: appState.coins + rewards.coins,
-      pet: {
-        ...appState.pet,
-        hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
-        xp: (appState.pet?.xp || 0) + rewards.xp,
-      },
+      pet: applyPetDamage(appState.pet, Math.abs(damage)),
       history: [newHistoryEntry, ...(appState.history || [])],
     };
 
