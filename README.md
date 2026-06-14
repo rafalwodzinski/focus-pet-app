@@ -140,13 +140,6 @@ Komponent nasłuchuje zmian adresu w aplikacji i wysyła page view dla aktualnej
 /history
 ```
 
-Do dokumentacji warto pokazać w Google Analytics przede wszystkim:
-
-- `Reports -> Realtime`: dowód, że GA widzi aktywnego użytkownika na wdrożonej stronie,
-- `Reports -> Engagement -> Pages and screens`: dowód, że GA zbiera wejścia na konkretne podstrony aplikacji,
-- `Reports -> Engagement -> Events`: dowód, że pojawia się zdarzenie `page_view`,
-- opcjonalnie `Admin -> Data streams -> Web stream details`: dowód, że strumień webowy ma poprawny adres wdrożonej aplikacji.
-
 ## Hotjar / Contentsquare
 
 Hotjar/Contentsquare został dodany przez tag w sekcji `<head>` pliku:
@@ -157,12 +150,6 @@ public/index.html
 
 Dzięki temu panel Hotjar/Contentsquare poprawnie wykrywa instalację kodu śledzącego na wdrożonej stronie.
 
-Do dokumentacji warto pokazać w Hotjar/Contentsquare przede wszystkim:
-
-- ekran `Verify installation` albo ustawienia projektu z informacją, że tag został wykryty,
-- listę nagrań użytkowników, jeśli pojawiły się sesje,
-- widok pojedynczego nagrania/session replay, pokazujący kliknięcia i przejścia po aplikacji,
-- opcjonalnie heatmapę kliknięć albo widok dashboardu z aktywnością użytkowników.
 
 ## Screeny aplikacji
 
