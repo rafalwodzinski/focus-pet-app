@@ -9,11 +9,6 @@ import { useAuth } from '../context/AuthContext';
 import { initialAppState } from '../data/initialState';
 import { getUserData, saveUserData } from '../utils/storage';
 
-const taskTypes = [
-  { label: 'Task', value: 'tasks' },
-  { label: 'Project', value: 'projects' },
-];
-
 const categories = ['Deep Work', 'Routine', 'Project', 'Study'];
 const priorities = [
   { label: 'Low priority', value: 'low' },

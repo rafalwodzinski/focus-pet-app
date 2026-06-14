@@ -14,16 +14,16 @@ function HomePage() {
   const [selectedTaskId, setSelectedTaskId] = useState('');
   const [randomProTip, setRandomProTip] = useState('');
 
-  const proTips = [
-    "Stay hydrated! Drink a glass of water.",
-    "A short stretch break will improve your circulation.",
-    "Magical pets grow faster when you focus on one task at a time.",
-    "Keep your phone away from your desk to avoid temptation.",
-    "Deep focus for 60 minutes yields the best results and rewards."
-  ];
-
   useEffect(() => {
-    setRandomProTip(proTips[Math.floor(Math.random() * proTips.length)]);
+    const tips = [
+      'Stay hydrated! Drink a glass of water.',
+      'A short stretch break will improve your circulation.',
+      'Magical pets grow faster when you focus on one task at a time.',
+      'Keep your phone away from your desk to avoid temptation.',
+      'Deep focus for 60 minutes yields the best results and rewards.',
+    ];
+
+    setRandomProTip(tips[Math.floor(Math.random() * tips.length)]);
   }, []);
 
   useEffect(() => {
