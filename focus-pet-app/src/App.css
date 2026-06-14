@@ -771,10 +771,10 @@ select {
 
 .subtask-list {
   display: grid;
-  gap: 16px;
-  margin-left: 48px;
-  margin-top: -12px;
-  margin-bottom: 8px;
+  gap: 14px;
+  margin: 12px 0 8px 48px;
+  padding-left: 16px;
+  border-left: 1px solid rgba(115, 217, 181, 0.28);
 }
 
 .subtask-list .task-card {
