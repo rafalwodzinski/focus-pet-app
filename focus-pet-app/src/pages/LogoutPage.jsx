@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { useAuth } from '../context/AuthContext';
+import { initialAppState } from '../data/initialState';
+import { getUserData } from '../utils/storage';
 import './AuthPages.css';
 
 const LogoutPage = () => {
-  const { logout } = useAuth();
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const [pet, setPet] = useState(initialAppState.pet);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function fetchPetData() {
+      if (!currentUser) return;
+
+      const data = await getUserData(currentUser.uid);
+      setPet(data?.pet || initialAppState.pet);
+    }
+
+    fetchPetData();
+  }, [currentUser]);
+
+  const petType = pet?.type || initialAppState.pet.type;
+  const petStage = pet?.hp <= 0 ? 'hibernation' : pet?.stage || initialAppState.pet.stage || 'baby';
+  const petImage = `${process.env.PUBLIC_URL}/assets/pets/${petType}/${petStage}.png`;
 
   const handleLogout = async () => {
     setError('');
@@ -37,7 +55,7 @@ const LogoutPage = () => {
         <div className="logout-avatar" aria-hidden="true">
           <img
             className="logout-avatar__image"
-            src={`${process.env.PUBLIC_URL}/assets/pets/dog/baby.png`}
+            src={petImage}
             alt=""
           />
         </div>
