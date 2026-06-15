@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import { useAuth } from '../context/AuthContext';
 import { initialAppState } from '../data/initialState';
 import { getUserData } from '../utils/storage';
+import { getPetStageByStats } from '../utils/rewards';
 import './AuthPages.css';
 
 const LogoutPage = () => {
@@ -25,7 +26,7 @@ const LogoutPage = () => {
   }, [currentUser]);
 
   const petType = pet?.type || initialAppState.pet.type;
-  const petStage = pet?.hp <= 0 ? 'hibernation' : pet?.stage || initialAppState.pet.stage || 'baby';
+  const petStage = getPetStageByStats(pet);
   const petImage = `${process.env.PUBLIC_URL}/assets/pets/${petType}/${petStage}.png`;
 
   const handleLogout = async () => {

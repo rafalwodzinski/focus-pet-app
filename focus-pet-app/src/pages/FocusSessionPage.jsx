@@ -4,7 +4,7 @@ import { Pause, Square, Volume2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { initialAppState } from '../data/initialState';
 import { mockTasks } from '../data/mockTasks';
-import { applyPetDamage, calculateSessionRewards } from '../utils/rewards';
+import { applyPetDamage, applyPetEvolution, calculateSessionRewards } from '../utils/rewards';
 import { getUserData, saveUserData } from '../utils/storage';
 import { formatSeconds } from '../utils/timer';
 import SessionCompletePage from './SessionCompletePage';
@@ -62,14 +62,16 @@ function FocusSessionPage() {
       isRegeneration,
     };
 
+    const nextPet = applyPetEvolution({
+      ...appState.pet,
+      hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
+      xp: (appState.pet?.xp || 0) + rewards.xp,
+    });
+
     const nextState = {
       ...appState,
       coins: appState.coins + rewards.coins,
-      pet: {
-        ...appState.pet,
-        hp: Math.min((appState.pet?.hp || 0) + rewards.hp, maxPetStat),
-        xp: (appState.pet?.xp || 0) + rewards.xp,
-      },
+      pet: nextPet,
       tasks: nextTasks,
       history: [newHistoryEntry, ...(appState.history || [])],
     };
