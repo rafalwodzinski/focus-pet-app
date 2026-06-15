@@ -25,9 +25,12 @@ function OnboardingPage() {
       pet: {
         ...initialAppState.pet,
         type: selectedPet,
+        typeLabel: chosenPetData.label,
         name: petName,
         stage: 'baby',
-        stageLabel: `Baby ${chosenPetData.label}`
+        stageLabel: `Baby ${chosenPetData.label}`,
+        xp: 0,
+        nextLevelXp: 100,
       }
     };
     

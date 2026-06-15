@@ -8,6 +8,7 @@ import ShopItemCard from '../components/ShopItemCard';
 import { getUserData, saveUserData } from '../utils/storage';
 import { useAuth } from '../context/AuthContext';
 import { initialAppState } from '../data/initialState';
+import { applyPetEvolution } from '../utils/rewards';
 
 const filters = ['All', 'Food', 'Accessories'];
 const maxPetStat = 100;
@@ -21,10 +22,10 @@ function applyItemEffect(pet, effect) {
     return pet;
   }
 
-  return {
+  return applyPetEvolution({
     ...pet,
     [effect.stat]: Math.min((pet[effect.stat] || 0) + effect.value, maxPetStat),
-  };
+  });
 }
 
 function ShopPage() {
